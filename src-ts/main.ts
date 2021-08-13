@@ -5,8 +5,8 @@ if (VIEW === null) throw Error("No element found with id 'falling-stars'.");
 if (!(VIEW instanceof HTMLCanvasElement)) throw Error("Element with id 'falling-stars' is not a canvas element.");
 const PARENT = VIEW.parentElement;
 if (PARENT === null) throw Error("Falling-stars canvas needs to have a parent element.");
-const WIDTH = PARENT.clientWidth;
-const HEIGHT = PARENT.clientHeight;
+let WIDTH = PARENT.clientWidth;
+let HEIGHT = PARENT.clientHeight;
 VIEW.width = WIDTH;
 VIEW.height = HEIGHT;
 const ANGLE = Math.PI/5;
@@ -130,3 +130,16 @@ function mapDistanceToAlpha(dist: number) {
   let c = (1 - dist/WIDTH);
   return (0.4 + c*c*c*c*0.6);
 }
+
+function resize() {
+  if (VIEW instanceof HTMLCanvasElement && PARENT != null) {
+    WIDTH = PARENT.clientWidth;
+    HEIGHT = PARENT.clientHeight;
+    VIEW.width = WIDTH;
+    VIEW.height = HEIGHT;
+    app.renderer.resize(WIDTH, HEIGHT);
+  }
+}
+
+window.addEventListener('resize', resize);
+resize();
