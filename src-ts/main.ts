@@ -11,7 +11,7 @@ VIEW.width = WIDTH;
 VIEW.height = HEIGHT;
 const ANGLE = Math.PI/5;
 const ANGLE_TAN = Math.tan(ANGLE);
-const WIDTH_CALC = WIDTH + ANGLE_TAN * HEIGHT;
+let WIDTH_CALC = WIDTH + ANGLE_TAN * HEIGHT;
 let OFFSETX = 0;
 let OFFSETY = 0;
 {
@@ -135,6 +135,7 @@ function resize() {
   if (VIEW instanceof HTMLCanvasElement && PARENT != null) {
     WIDTH = PARENT.clientWidth;
     HEIGHT = PARENT.clientHeight;
+    WIDTH_CALC = WIDTH + ANGLE_TAN * HEIGHT;
     VIEW.width = WIDTH;
     VIEW.height = HEIGHT;
     app.renderer.resize(WIDTH, HEIGHT);
