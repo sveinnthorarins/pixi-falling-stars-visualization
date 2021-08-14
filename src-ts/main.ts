@@ -67,7 +67,7 @@ for (let i = 0; i < numStars; i++) {
   stars[i].alpha = 0.4;
   stars[i].x = Math.random() * WIDTH_CALC;
   stars[i].y = Math.random() * (HEIGHT*2) - (HEIGHT*1.2);
-  stars[i].speed = Math.random()*5 + 2;
+  stars[i].speed = Math.random()*(0.0065*HEIGHT - 2) + 2;
 }
 
 function loop() {
