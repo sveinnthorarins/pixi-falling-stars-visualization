@@ -45,7 +45,7 @@ for (let i = 0; i < 4; i++) {
   for (let j = 0; j < 4; j++) {
     const starGraphic = new PIXI.Graphics()
       .moveTo(0, 0)
-      .lineStyle(0.002*WIDTH, starColors[i])
+      .lineStyle(4, starColors[i])
       .lineTo(ANGLE_TAN * starStreaks[j], -starStreaks[j])
       .closePath();
     starGraphics.push(app.renderer.generateTexture(starGraphic));
@@ -58,7 +58,7 @@ interface Star extends PIXI.Sprite {
 
 // Initialize array of stars
 const stars: Star[] = [];
-const numStars = 100;
+const numStars = (WIDTH < 600 || HEIGHT < 600) ? 50 : 100;
 for (let i = 0; i < numStars; i++) {
   // @ts-ignore
   stars[i] = new PIXI.Sprite(starGraphics[Math.floor(Math.random() * 16)]);
