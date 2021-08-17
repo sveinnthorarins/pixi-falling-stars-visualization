@@ -5,12 +5,19 @@ if (VIEW === null) throw Error("No element found with id 'falling-stars'.");
 if (!(VIEW instanceof HTMLCanvasElement)) throw Error("Element with id 'falling-stars' is not a canvas element.");
 const PARENT = VIEW.parentElement;
 if (PARENT === null) throw Error("Falling-stars canvas needs to have a parent element.");
+
 let WIDTH = PARENT.clientWidth;
 let HEIGHT = PARENT.clientHeight;
 VIEW.width = WIDTH;
 VIEW.height = HEIGHT;
-const ANGLE = Math.PI/5;
+
+const ALPHA_MIN = 0.3; // can be changed to preference
+const ALPHA_MAX = 0.6; // can be changed to preference
+const ALPHA_CALC = ALPHA_MAX - ALPHA_MIN;
+
+const ANGLE = Math.PI/5; // can be changed to preference
 const ANGLE_TAN = Math.tan(ANGLE);
+
 let WIDTH_CALC = WIDTH + ANGLE_TAN * HEIGHT;
 let OFFSETX = 0;
 let OFFSETY = 0;
@@ -58,13 +65,13 @@ interface Star extends PIXI.Sprite {
 
 // Initialize array of stars
 const stars: Star[] = [];
-const numStars = (WIDTH < 600 || HEIGHT < 600) ? 50 : 100;
+const numStars = (WIDTH < 600 || HEIGHT < 600) ? 50 : 100; // can be changed to preference
 for (let i = 0; i < numStars; i++) {
   // @ts-ignore
   stars[i] = new PIXI.Sprite(starGraphics[Math.floor(Math.random() * 16)]);
   stars[i].anchor.set(0, 1);
   stars[i].scale.set(0.5);
-  stars[i].alpha = 0.4;
+  stars[i].alpha = ALPHA_MIN;
   stars[i].x = Math.random() * WIDTH_CALC;
   stars[i].y = Math.random() * (HEIGHT*2) - (HEIGHT*1.2);
   stars[i].speed = Math.random()*(0.0065*HEIGHT - 2) + 2;
@@ -126,9 +133,9 @@ function setAlphas(event: PointerEvent, reset: boolean = false) {
 }
 
 function mapDistanceToAlpha(dist: number) {
-  if (dist > WIDTH) return 0.4;
+  if (dist > WIDTH) return ALPHA_MIN;
   let c = (1 - dist/WIDTH);
-  return (0.4 + c*c*c*c*0.6);
+  return (ALPHA_MIN + c*c*c*c*ALPHA_CALC);
 }
 
 function resize() {
