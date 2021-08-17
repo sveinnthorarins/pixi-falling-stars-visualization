@@ -12,7 +12,7 @@ VIEW.width = WIDTH;
 VIEW.height = HEIGHT;
 
 const ALPHA_MIN = 0.3; // can be changed to preference
-const ALPHA_MAX = 0.6; // can be changed to preference
+const ALPHA_MAX = 0.8; // can be changed to preference
 const ALPHA_CALC = ALPHA_MAX - ALPHA_MIN;
 
 const ANGLE = Math.PI/5; // can be changed to preference
