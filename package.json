@@ -6,8 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "tsc-watch": "tsc --watch",
-    "bundle": "tsc && rollup -c",
-    "bundle-watch": "rollup -c -w"
+    "bundle": "tsc && rollup -c ./rollup.config-main.js && rollup -c ./rollup.config-react.js",
+    "bundle-watch": "rollup -c ./rollup.config-main.js -w"
   },
   "keywords": [],
   "author": "",

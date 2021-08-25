@@ -6,13 +6,8 @@ import { terser } from 'rollup-plugin-terser';
 export default {
   input: 'src-generated-js/main.js',
   output: {
-    file: 'bundle.js',
+    file: 'fsbundle-main.js',
     format: 'esm',
   },
-  plugins: [
-    resolve({ preferBuiltins: false }),
-    commonjs(),
-    babel({ babelHelpers: 'bundled' }),
-    terser(),
-  ],
+  plugins: [resolve({ preferBuiltins: false }), commonjs(), babel({ babelHelpers: 'bundled' }), terser()],
 };
