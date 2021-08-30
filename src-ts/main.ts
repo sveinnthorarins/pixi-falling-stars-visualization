@@ -89,6 +89,7 @@ function loop() {
   }
 }
 
+app.ticker.maxFPS = 60;
 app.stage.addChild(...stars);
 app.ticker.add(loop);
 

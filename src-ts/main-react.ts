@@ -80,6 +80,7 @@ if (FallingStarsGameData === undefined) {
           autoStart: true,
         });
         FallingStarsGameData.initialize();
+        FallingStarsGameData.app.ticker.maxFPS = 60;
         FallingStarsGameData.app.stage.addChild(...FallingStarsGameData.stars);
         FallingStarsGameData.app.ticker.add(FallingStarsGameData.loop);
       } else {
