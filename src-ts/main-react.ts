@@ -23,7 +23,7 @@ type GameData = {
   app: PIXI.Application | null,
   updateContainer: (container: HTMLDivElement) => void,
   initialize: () => void,
-  loop: () => void,
+  loop: (deltaTime: number) => void,
   mapDistanceToAlpha: (dist: number) => number,
   setAlphas: (event: PointerEvent, reset: boolean) => void,
   onHover: (event: PointerEvent) => void,
@@ -80,7 +80,6 @@ if (FallingStarsGameData === undefined) {
           autoStart: true,
         });
         FallingStarsGameData.initialize();
-        FallingStarsGameData.app.ticker.maxFPS = 60;
         FallingStarsGameData.app.stage.addChild(...FallingStarsGameData.stars);
         FallingStarsGameData.app.ticker.add(FallingStarsGameData.loop);
       } else {
@@ -122,11 +121,12 @@ if (FallingStarsGameData === undefined) {
         FallingStarsGameData.stars[i].speed = Math.random()*(0.0065*height - 2) + 2;
       }
     },
-    loop: () => {
+    loop: (deltaTime) => {
       if (FallingStarsGameData === undefined) return;
       for (let i = FallingStarsGameData.NUM_STARS-1; i >= 0; i--) {
-        FallingStarsGameData.stars[i].x -= FallingStarsGameData.ANGLE_TAN * FallingStarsGameData.stars[i].speed;
-        FallingStarsGameData.stars[i].y += FallingStarsGameData.stars[i].speed;
+        const movement = FallingStarsGameData.stars[i].speed * deltaTime;
+        FallingStarsGameData.stars[i].x -= FallingStarsGameData.ANGLE_TAN * movement;
+        FallingStarsGameData.stars[i].y += movement;
         if (FallingStarsGameData.stars[i].y - FallingStarsGameData.stars[i].height > FallingStarsGameData.HEIGHT 
             || FallingStarsGameData.stars[i].x + FallingStarsGameData.stars[i].width < 0) {
           FallingStarsGameData.stars[i].x = Math.random() * FallingStarsGameData.WIDTH_CALC;

@@ -77,10 +77,11 @@ for (let i = 0; i < numStars; i++) {
   stars[i].speed = Math.random()*(0.0065*HEIGHT - 2) + 2;
 }
 
-function loop() {
+function loop(deltaTime: number) {
   for (let i = numStars-1; i >= 0; i--) {
-    stars[i].x -= ANGLE_TAN * stars[i].speed;
-    stars[i].y += stars[i].speed;
+    const movement = stars[i].speed * deltaTime;
+    stars[i].x -= ANGLE_TAN * movement;
+    stars[i].y += movement;
     if (stars[i].y - stars[i].height > HEIGHT || stars[i].x + stars[i].width < 0) {
       stars[i].x = Math.random() * WIDTH_CALC;
       stars[i].y = 0;
@@ -89,7 +90,6 @@ function loop() {
   }
 }
 
-app.ticker.maxFPS = 60;
 app.stage.addChild(...stars);
 app.ticker.add(loop);
 
