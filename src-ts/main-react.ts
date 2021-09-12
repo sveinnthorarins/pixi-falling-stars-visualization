@@ -109,7 +109,7 @@ if (FallingStarsGameData === undefined) {
         }
       }
       // Initialize array of stars
-      FallingStarsGameData.NUM_STARS = (width < 600 || height < 600) ? 50 : 100;
+      FallingStarsGameData.NUM_STARS = (width < 600 || height < 600) ? 30 : 60;
       for (let i = 0; i < FallingStarsGameData.NUM_STARS; i++) {
         // @ts-ignore
         FallingStarsGameData.stars[i] = new PIXI.Sprite(starGraphics[Math.floor(Math.random() * 16)]);
